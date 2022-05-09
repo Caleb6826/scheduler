@@ -21,13 +21,13 @@ body {
     border-bottom: 10px solid black;
   }
   
-  .note-nox{
+  .note-box{
     white-space: pre-wrap;
   }
   
   .hour{
     text-align: center;
-    border-radius: 15px;
+    
   }
   
   .row {
@@ -39,7 +39,7 @@ body {
   .hour {
     background-color: #ffffff;
     color: #000000;
-    border-top: 1px dashed #000000;
+    border-bottom: 1px solid #000000;
   }
   
   .past {

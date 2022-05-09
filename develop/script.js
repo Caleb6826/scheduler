@@ -20,8 +20,8 @@ function init(){
         else
             adjustedHour = adjustedHour + "pm"
           
-        cont.append(`<div class= 'container-row'> 
-            ${adjustedHour} 
+        cont.append(`<div class= 'container-row row' > 
+            <div class= "hour">${adjustedHour}</div> 
             <textarea class='note-box note-input-${hour}'>${noteValue}</textarea>
             <button class='saveBtn' onclick='savenote(${hour})'></button>
         </div>`);
