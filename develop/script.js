@@ -1,46 +1,53 @@
 const business = { start: 9, end: 18 }
 
-
-
-
-
-init()
 function init(){
-    var cont = $(".container");
     $("#currentDay").append(moment().format('MMMM Do YYYY'));
 
-
-    for(let i = business.start; i < business.end; i++){
-        let hr = i; 
-        if(hr > 12){
-            hr = hr - 12;
+    var cont = $(".container");
+    for(let hour = business.start; hour < business.end; hour++){
+        let adjustedHour = hour; 
+        let noteValue =  localStorage.getItem("note-" + hour);
+       
+        if(noteValue == null){ 
+            noteValue = '';
+       }
+        if(hour > 12){
+            adjustedHour = adjustedHour - 12;
         }
-        if( i < 12)
-          hr = hr + 'am';
-          else
-          hr = hr + "pm"
+
+        if( hour < 12)
+            adjustedHour = adjustedHour + 'am';
+        else
+            adjustedHour = adjustedHour + "pm"
           
         cont.append(`<div class= 'container-row'> 
-         ${hr} 
-        <textarea class='note-box note-input-${i}' />
-        <input type='button'class='savebtn'/> </div>`);
+            ${adjustedHour} 
+            <textarea class='note-box note-input-${hour}'>${noteValue}</textarea>
+            <button class='saveBtn' onclick='savenote(${hour})'></button>
+        </div>`);
         
     }
     applyclr();
 }
+init();
 
 function applyclr(){
-    for(let i = business.start; i < business.end; i++){
-      var timeclass= 'past';
+    for(let hour = business.start; hour < business.end; hour++){
+        let timeclass= 'past';
         let currenttime =  moment().format('H');
 
-        if(i > currenttime){
+        if(hour > currenttime){
          timeclass = 'future';
          
         }
-        else if(i == currenttime){
+        else if(hour == currenttime){
             timeclass = 'present';
         }
-      $('.note-input-' + i).addClass(timeclass);
+      $('.note-input-' + hour).addClass(timeclass);
 }  
+}
+function savenote(hour){
+    console.log( $('.note-input-' + hour).val() );
+    localStorage.setItem('note-' +hour, $('.note-input-' + hour).val() );
+
 }
